@@ -46,7 +46,7 @@ export function HourlyForecastWidget({ data, timezone, loading }: HourlyForecast
     const precipitation = data.precipitation[index];
     const weatherCode = data.weathercode[index];
     const windSpeed = Math.round(data.windspeed_10m[index]);
-    const humidity = data.humidity ? data.humidity[index] : 0;
+    const humidity = (data as any).relativehumidity_2m ? (data as any).relativehumidity_2m[index] : 0;
 
     const weatherInfo = WEATHER_CODES[weatherCode] || { description: 'Unknown', icon: 'question' };
 
