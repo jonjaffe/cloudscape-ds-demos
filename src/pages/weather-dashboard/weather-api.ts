@@ -30,7 +30,7 @@ export class WeatherApiService {
     const params = new URLSearchParams({
       latitude: location.latitude.toString(),
       longitude: location.longitude.toString(),
-      hourly: 'temperature_2m,precipitation,weathercode,windspeed_10m,relativehumidity_2m',
+      hourly: 'temperature_2m,precipitation,weathercode,windspeed_10m,relative_humidity_2m',
       temperature_unit: 'celsius',
       windspeed_unit: 'kmh',
       precipitation_unit: 'mm',
@@ -73,7 +73,7 @@ export class WeatherApiService {
       latitude: location.latitude.toString(),
       longitude: location.longitude.toString(),
       current_weather: 'true',
-      hourly: 'temperature_2m,precipitation,weathercode,windspeed_10m,relativehumidity_2m',
+      hourly: 'temperature_2m,precipitation,weathercode,windspeed_10m,relative_humidity_2m',
       daily: 'temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode,windspeed_10m_max',
       temperature_unit: 'celsius',
       windspeed_unit: 'kmh',
