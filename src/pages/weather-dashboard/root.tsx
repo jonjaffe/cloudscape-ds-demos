@@ -7,12 +7,6 @@ import { App } from './app';
 
 export default function Root() {
   return (
-    <CustomAppLayout
-      content={<App />}
-      contentType="cards"
-      breadcrumbs={<></>}
-      navigationHide={true}
-      toolsHide={true}
-    />
+    <CustomAppLayout content={<App />} contentType="cards" breadcrumbs={<></>} navigationHide={true} toolsHide={true} />
   );
 }

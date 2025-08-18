@@ -32,16 +32,12 @@ export function App() {
         ref={appLayout}
         content={
           <SpaceBetween size="m">
-            <WeatherHeader 
+            <WeatherHeader
               actions={
-                <Button 
-                  variant="primary" 
-                  iconName="refresh"
-                  onClick={() => window.location.reload()}
-                >
+                <Button variant="primary" iconName="refresh" onClick={() => window.location.reload()}>
                   Refresh Data
                 </Button>
-              } 
+              }
             />
             <WeatherContent />
           </SpaceBetween>

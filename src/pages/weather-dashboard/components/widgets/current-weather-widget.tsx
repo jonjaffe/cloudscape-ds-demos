@@ -45,14 +45,7 @@ export function CurrentWeatherWidget({ data, location, loading }: CurrentWeather
   return (
     <Container
       header={
-        <Header
-          variant="h2"
-          info={
-            <Badge color={isDaytime ? 'blue' : 'grey'}>
-              {isDaytime ? 'Day' : 'Night'}
-            </Badge>
-          }
-        >
+        <Header variant="h2" info={<Badge color={isDaytime ? 'blue' : 'grey'}>{isDaytime ? 'Day' : 'Night'}</Badge>}>
           Current Weather
         </Header>
       }
@@ -64,7 +57,7 @@ export function CurrentWeatherWidget({ data, location, loading }: CurrentWeather
             <span>{Math.round(data.temperature)}°C</span>
           </SpaceBetween>
         </Box>
-        
+
         <Box textAlign="center">
           <Box variant="h3" color="text-status-info">
             {location.name}

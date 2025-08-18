@@ -58,19 +58,13 @@ export function WeatherMapWidget({ location, loading }: WeatherMapWidgetProps) {
   return (
     <Container
       header={
-        <Header
-          variant="h2"
-          description="Location details and map links"
-        >
+        <Header variant="h2" description="Location details and map links">
           Location Info
         </Header>
       }
     >
       <SpaceBetween size="l">
-        <KeyValuePairs
-          columns={1}
-          items={locationItems}
-        />
+        <KeyValuePairs columns={1} items={locationItems} />
 
         <SpaceBetween size="m">
           <Box variant="h4">Quick Links</Box>
@@ -88,14 +82,16 @@ export function WeatherMapWidget({ location, loading }: WeatherMapWidgetProps) {
         </SpaceBetween>
 
         <Box>
-          <Box variant="h4" padding={{ bottom: 's' }}>Coordinates</Box>
-          <Box 
-            variant="code" 
+          <Box variant="h4" padding={{ bottom: 's' }}>
+            Coordinates
+          </Box>
+          <Box
+            variant="code"
             padding="s"
-            style={{ 
+            style={{
               backgroundColor: 'var(--color-background-input-default)',
               borderRadius: '4px',
-              fontFamily: 'monospace'
+              fontFamily: 'monospace',
             }}
           >
             {location.latitude.toFixed(6)}, {location.longitude.toFixed(6)}

@@ -70,10 +70,7 @@ export function DailyForecastWidget({ data, timezone, loading }: DailyForecastWi
   return (
     <Container
       header={
-        <Header
-          variant="h2"
-          description="Daily weather forecast for the next 7 days"
-        >
+        <Header variant="h2" description="Daily weather forecast for the next 7 days">
           7-Day Forecast
         </Header>
       }
@@ -94,9 +91,7 @@ export function DailyForecastWidget({ data, timezone, loading }: DailyForecastWi
           >
             <div style={{ flex: '1', minWidth: '80px' }}>
               <SpaceBetween direction="horizontal" size="xs" alignItems="center">
-                <Box variant="h5">
-                  {item.day}
-                </Box>
+                <Box variant="h5">{item.day}</Box>
                 {item.isToday && <Badge color="blue">Today</Badge>}
               </SpaceBetween>
               <Box variant="small" color="text-body-secondary">
@@ -117,18 +112,14 @@ export function DailyForecastWidget({ data, timezone, loading }: DailyForecastWi
               <SpaceBetween size="xs">
                 <SpaceBetween direction="horizontal" size="s" alignItems="center">
                   <Box variant="h5">{item.maxTemp}°</Box>
-                  <Box variant="small" color="text-body-secondary">{item.minTemp}°</Box>
-                </SpaceBetween>
-                
-                <SpaceBetween size="xs">
-                  {item.precipitation > 0 && (
-                    <Box variant="small">
-                      💧 {item.precipitation}mm
-                    </Box>
-                  )}
-                  <Box variant="small">
-                    💨 {item.maxWind}km/h
+                  <Box variant="small" color="text-body-secondary">
+                    {item.minTemp}°
                   </Box>
+                </SpaceBetween>
+
+                <SpaceBetween size="xs">
+                  {item.precipitation > 0 && <Box variant="small">💧 {item.precipitation}mm</Box>}
+                  <Box variant="small">💨 {item.maxWind}km/h</Box>
                 </SpaceBetween>
               </SpaceBetween>
             </div>

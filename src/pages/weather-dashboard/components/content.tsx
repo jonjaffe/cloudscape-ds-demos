@@ -32,7 +32,7 @@ export function WeatherContent() {
   const loadWeatherData = async (location: WeatherLocation) => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const data = await WeatherApiService.getCompleteWeatherData(location);
       setWeatherData(data);
@@ -92,37 +92,14 @@ export function WeatherContent() {
           { colspan: { default: 12, s: 12, m: 12, l: 4 } },
         ]}
       >
-        <CurrentWeatherWidget 
-          data={weatherData?.current_weather} 
-          location={selectedLocation}
-          loading={loading}
-        />
-        <WeatherStatsWidget 
-          data={weatherData} 
-          loading={loading}
-        />
-        <WeatherMapWidget 
-          location={selectedLocation}
-          loading={loading}
-        />
+        <CurrentWeatherWidget data={weatherData?.current_weather} location={selectedLocation} loading={loading} />
+        <WeatherStatsWidget data={weatherData} loading={loading} />
+        <WeatherMapWidget location={selectedLocation} loading={loading} />
       </Grid>
 
-      <Grid
-        gridDefinition={[
-          { colspan: { default: 12, l: 8 } },
-          { colspan: { default: 12, l: 4 } },
-        ]}
-      >
-        <HourlyForecastWidget 
-          data={weatherData?.hourly} 
-          timezone={weatherData?.timezone}
-          loading={loading}
-        />
-        <DailyForecastWidget 
-          data={weatherData?.daily} 
-          timezone={weatherData?.timezone}
-          loading={loading}
-        />
+      <Grid gridDefinition={[{ colspan: { default: 12, l: 8 } }, { colspan: { default: 12, l: 4 } }]}>
+        <HourlyForecastWidget data={weatherData?.hourly} timezone={weatherData?.timezone} loading={loading} />
+        <DailyForecastWidget data={weatherData?.daily} timezone={weatherData?.timezone} loading={loading} />
       </Grid>
     </SpaceBetween>
   );

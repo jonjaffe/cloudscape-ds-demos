@@ -64,10 +64,7 @@ export function HourlyForecastWidget({ data, timezone, loading }: HourlyForecast
   return (
     <Container
       header={
-        <Header
-          variant="h2"
-          description="Hourly weather forecast for the next 24 hours"
-        >
+        <Header variant="h2" description="Hourly weather forecast for the next 24 hours">
           24-Hour Forecast
         </Header>
       }
@@ -83,33 +80,29 @@ export function HourlyForecastWidget({ data, timezone, loading }: HourlyForecast
                 border: '1px solid var(--color-border-divider-default)',
                 borderRadius: '8px',
                 textAlign: 'center',
-                backgroundColor: item.isCurrentHour ? 'var(--color-background-layout-toggle-selected-default)' : 'transparent',
+                backgroundColor: item.isCurrentHour
+                  ? 'var(--color-background-layout-toggle-selected-default)'
+                  : 'transparent',
               }}
             >
               <SpaceBetween size="xs">
                 <Box variant="small" color={item.isCurrentHour ? 'text-status-info' : 'text-body-secondary'}>
                   {item.time}
-                  {item.isCurrentHour && <Badge color="blue" style={{ marginLeft: '4px' }}>Now</Badge>}
-                </Box>
-                
-                <Icon name={item.weatherInfo.icon} size="medium" />
-                
-                <Box variant="h4">
-                  {item.temp}°C
-                </Box>
-                
-                <SpaceBetween size="xxs">
-                  <Box variant="small">
-                    💧 {item.precipitation}mm
-                  </Box>
-                  <Box variant="small">
-                    💨 {item.windSpeed}km/h
-                  </Box>
-                  {item.humidity > 0 && (
-                    <Box variant="small">
-                      💦 {Math.round(item.humidity)}%
-                    </Box>
+                  {item.isCurrentHour && (
+                    <Badge color="blue" style={{ marginLeft: '4px' }}>
+                      Now
+                    </Badge>
                   )}
+                </Box>
+
+                <Icon name={item.weatherInfo.icon} size="medium" />
+
+                <Box variant="h4">{item.temp}°C</Box>
+
+                <SpaceBetween size="xxs">
+                  <Box variant="small">💧 {item.precipitation}mm</Box>
+                  <Box variant="small">💨 {item.windSpeed}km/h</Box>
+                  {item.humidity > 0 && <Box variant="small">💦 {Math.round(item.humidity)}%</Box>}
                 </SpaceBetween>
               </SpaceBetween>
             </div>

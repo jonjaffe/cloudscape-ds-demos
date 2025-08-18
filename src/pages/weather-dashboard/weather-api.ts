@@ -18,7 +18,7 @@ export class WeatherApiService {
     });
 
     const response = await fetch(`${BASE_URL}?${params}`);
-    
+
     if (!response.ok) {
       throw new Error(`Weather API error: ${response.status} ${response.statusText}`);
     }
@@ -39,7 +39,7 @@ export class WeatherApiService {
     });
 
     const response = await fetch(`${BASE_URL}?${params}`);
-    
+
     if (!response.ok) {
       throw new Error(`Weather API error: ${response.status} ${response.statusText}`);
     }
@@ -60,7 +60,7 @@ export class WeatherApiService {
     });
 
     const response = await fetch(`${BASE_URL}?${params}`);
-    
+
     if (!response.ok) {
       throw new Error(`Weather API error: ${response.status} ${response.statusText}`);
     }
@@ -83,7 +83,7 @@ export class WeatherApiService {
     });
 
     const response = await fetch(`${BASE_URL}?${params}`);
-    
+
     if (!response.ok) {
       throw new Error(`Weather API error: ${response.status} ${response.statusText}`);
     }

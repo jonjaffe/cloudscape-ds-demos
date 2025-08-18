@@ -32,12 +32,24 @@ export function formatPrecipitation(precip: number, unit: 'mm' | 'inch' = 'mm'):
 
 export function getWindDirection(degrees: number): string {
   const directions = [
-    'N', 'NNE', 'NE', 'ENE',
-    'E', 'ESE', 'SE', 'SSE',
-    'S', 'SSW', 'SW', 'WSW',
-    'W', 'WNW', 'NW', 'NNW'
+    'N',
+    'NNE',
+    'NE',
+    'ENE',
+    'E',
+    'ESE',
+    'SE',
+    'SSE',
+    'S',
+    'SSW',
+    'SW',
+    'WSW',
+    'W',
+    'WNW',
+    'NW',
+    'NNW',
   ];
-  
+
   const index = Math.round(degrees / 22.5) % 16;
   return directions[index];
 }
@@ -77,7 +89,7 @@ export function getWeatherIcon(weatherCode: number, isDay: boolean = true): stri
 
   const icons = iconMap[weatherCode];
   if (!icons) return 'question';
-  
+
   return isDay ? icons.day : icons.night;
 }
 
@@ -88,13 +100,12 @@ export function isValidCoordinates(lat: number, lon: number): boolean {
 export function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   // Haversine formula to calculate distance between two points
   const R = 6371; // Earth's radius in kilometers
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c; // Distance in kilometers
 }
 
@@ -110,6 +121,6 @@ export function formatRelativeTime(timestamp: string): string {
   if (diffMins < 60) return `${diffMins} minutes ago`;
   if (diffHours < 24) return `${diffHours} hours ago`;
   if (diffDays < 7) return `${diffDays} days ago`;
-  
+
   return time.toLocaleDateString();
 }

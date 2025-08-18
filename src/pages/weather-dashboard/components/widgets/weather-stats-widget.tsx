@@ -72,11 +72,11 @@ export function WeatherStatsWidget({ data, loading }: WeatherStatsWidgetProps) {
       value: `${data.elevation}m`,
     },
     {
-      label: 'Today\'s High',
+      label: "Today's High",
       value: `${Math.round(maxTemp)}°C`,
     },
     {
-      label: 'Today\'s Low',
+      label: "Today's Low",
       value: `${Math.round(minTemp)}°C`,
     },
     {
@@ -96,18 +96,12 @@ export function WeatherStatsWidget({ data, loading }: WeatherStatsWidgetProps) {
   return (
     <Container
       header={
-        <Header
-          variant="h2"
-          description="24-hour weather statistics"
-        >
+        <Header variant="h2" description="24-hour weather statistics">
           Weather Stats
         </Header>
       }
     >
-      <KeyValuePairs
-        columns={2}
-        items={statsItems}
-      />
+      <KeyValuePairs columns={2} items={statsItems} />
     </Container>
   );
 }
