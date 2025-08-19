@@ -75,16 +75,16 @@ export default function WeatherDashboard() {
   const fetchWeatherData = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const response = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code&timezone=auto&forecast_days=7&temperature_unit=fahrenheit`
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code&timezone=auto&forecast_days=7&temperature_unit=fahrenheit`,
       );
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch weather data');
       }
-      
+
       const data = await response.json();
       setWeatherData(data);
     } catch (err) {
@@ -110,7 +110,7 @@ export default function WeatherDashboard() {
 
   const formatTemperatureChart = () => {
     if (!weatherData?.hourly) return [];
-    
+
     return weatherData.hourly.time.slice(0, 24).map((time, index) => ({
       x: new Date(time),
       y: weatherData.hourly.temperature_2m[index],
@@ -119,7 +119,7 @@ export default function WeatherDashboard() {
 
   const formatDailyTemperatureChart = () => {
     if (!weatherData?.daily) return [];
-    
+
     return weatherData.daily.time.map((time, index) => ({
       x: new Date(time),
       y: weatherData.daily.temperature_2m_max[index],
@@ -128,7 +128,7 @@ export default function WeatherDashboard() {
 
   const formatPrecipitationChart = () => {
     if (!weatherData?.hourly) return [];
-    
+
     return weatherData.hourly.time.slice(0, 24).map((time, index) => ({
       x: new Date(time),
       y: weatherData.hourly.precipitation_probability[index],
@@ -142,10 +142,7 @@ export default function WeatherDashboard() {
       content={
         <ContentLayout
           header={
-            <Header
-              variant="h1"
-              description="Real-time weather data and forecasts powered by Open-Meteo API"
-            >
+            <Header variant="h1" description="Real-time weather data and forecasts powered by Open-Meteo API">
               Weather Dashboard
             </Header>
           }
@@ -207,12 +204,14 @@ export default function WeatherDashboard() {
                 <Container>
                   <SpaceBetween size="m">
                     <Box variant="h2">Current Weather - {locationName}</Box>
-                    <Grid gridDefinition={[
-                      { colspan: { default: 12, xs: 6, s: 4, m: 3, l: 3, xl: 3 } },
-                      { colspan: { default: 12, xs: 6, s: 4, m: 3, l: 3, xl: 3 } },
-                      { colspan: { default: 12, xs: 6, s: 4, m: 3, l: 3, xl: 3 } },
-                      { colspan: { default: 12, xs: 6, s: 4, m: 3, l: 3, xl: 3 } },
-                    ]}>
+                    <Grid
+                      gridDefinition={[
+                        { colspan: { default: 12, xs: 6, s: 4, m: 3, l: 3, xl: 3 } },
+                        { colspan: { default: 12, xs: 6, s: 4, m: 3, l: 3, xl: 3 } },
+                        { colspan: { default: 12, xs: 6, s: 4, m: 3, l: 3, xl: 3 } },
+                        { colspan: { default: 12, xs: 6, s: 4, m: 3, l: 3, xl: 3 } },
+                      ]}
+                    >
                       <Box textAlign="center" padding="s">
                         <Box fontSize="display-l">{getCurrentWeatherIcon(weatherData.current.weather_code)}</Box>
                         <Box variant="h3">{Math.round(weatherData.current.temperature_2m)}°F</Box>
@@ -234,10 +233,12 @@ export default function WeatherDashboard() {
                   </SpaceBetween>
                 </Container>
 
-                <Grid gridDefinition={[
-                  { colspan: { default: 12, l: 6, xl: 6 } },
-                  { colspan: { default: 12, l: 6, xl: 6 } },
-                ]}>
+                <Grid
+                  gridDefinition={[
+                    { colspan: { default: 12, l: 6, xl: 6 } },
+                    { colspan: { default: 12, l: 6, xl: 6 } },
+                  ]}
+                >
                   <Container>
                     <LineChart
                       series={[
@@ -298,11 +299,19 @@ export default function WeatherDashboard() {
                 <Container>
                   <SpaceBetween size="m">
                     <Box variant="h2">7-Day Forecast</Box>
-                    <Grid gridDefinition={weatherData.daily.time.map(() => ({ colspan: { default: 12, xs: 6, s: 4, m: 3, l: 2, xl: 2 } }))}>
+                    <Grid
+                      gridDefinition={weatherData.daily.time.map(() => ({
+                        colspan: { default: 12, xs: 6, s: 4, m: 3, l: 2, xl: 2 },
+                      }))}
+                    >
                       {weatherData.daily.time.map((date, index) => (
                         <Box key={date} textAlign="center" padding="s">
                           <Box variant="small">
-                            {new Date(date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                            {new Date(date).toLocaleDateString('en-US', {
+                              weekday: 'short',
+                              month: 'short',
+                              day: 'numeric',
+                            })}
                           </Box>
                           <Box fontSize="heading-m" padding={{ top: 'xs', bottom: 'xs' }}>
                             {getCurrentWeatherIcon(weatherData.daily.weather_code[index])}
