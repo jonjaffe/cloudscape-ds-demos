@@ -215,12 +215,12 @@ export default function WeatherDashboard() {
                     ]}>
                       <Box textAlign="center" padding="s">
                         <Box fontSize="display-l">{getCurrentWeatherIcon(weatherData.current.weather_code)}</Box>
-                        <Box variant="h3">{Math.round(weatherData.current.temperature_2m)}°C</Box>
+                        <Box variant="h3">{Math.round(weatherData.current.temperature_2m)}°F</Box>
                         <Box variant="small">{WEATHER_CODES[weatherData.current.weather_code] || 'Unknown'}</Box>
                       </Box>
                       <Box textAlign="center" padding="s">
                         <Box variant="h4">Feels like</Box>
-                        <Box variant="h3">{Math.round(weatherData.current.apparent_temperature)}°C</Box>
+                        <Box variant="h3">{Math.round(weatherData.current.apparent_temperature)}°F</Box>
                       </Box>
                       <Box textAlign="center" padding="s">
                         <Box variant="h4">Humidity</Box>
@@ -242,7 +242,7 @@ export default function WeatherDashboard() {
                     <LineChart
                       series={[
                         {
-                          title: 'Temperature (°C)',
+                          title: 'Temperature (°F)',
                           type: 'line',
                           data: formatTemperatureChart(),
                         },
@@ -251,7 +251,7 @@ export default function WeatherDashboard() {
                         formatTemperatureChart()[0]?.x,
                         formatTemperatureChart()[formatTemperatureChart().length - 1]?.x,
                       ]}
-                      yTitle="Temperature (°C)"
+                      yTitle="Temperature (°F)"
                       xTitle="Time"
                       height={300}
                       hideFilter
@@ -261,7 +261,7 @@ export default function WeatherDashboard() {
                         filterPlaceholder: 'Filter data',
                         filterSelectedAriaLabel: 'selected',
                         legendAriaLabel: 'Legend',
-                        chartAriaRoleDescription: '24-hour temperature forecast',
+                        chartAriaRoleDescription: '24-hour temperature forecast in Fahrenheit',
                       }}
                     />
                   </Container>
