@@ -324,7 +324,7 @@ export default function WeatherDashboard() {
                   <LineChart
                     series={[
                       {
-                        title: 'Daily High Temperature (°C)',
+                        title: 'Daily High Temperature (°F)',
                         type: 'line',
                         data: formatDailyTemperatureChart(),
                       },
@@ -333,7 +333,7 @@ export default function WeatherDashboard() {
                       formatDailyTemperatureChart()[0]?.x,
                       formatDailyTemperatureChart()[formatDailyTemperatureChart().length - 1]?.x,
                     ]}
-                    yTitle="Temperature (°C)"
+                    yTitle="Temperature (°F)"
                     xTitle="Date"
                     height={300}
                     hideFilter
@@ -343,7 +343,7 @@ export default function WeatherDashboard() {
                       filterPlaceholder: 'Filter data',
                       filterSelectedAriaLabel: 'selected',
                       legendAriaLabel: 'Legend',
-                      chartAriaRoleDescription: '7-day temperature forecast',
+                      chartAriaRoleDescription: '7-day temperature forecast in Fahrenheit',
                     }}
                   />
                 </Container>
