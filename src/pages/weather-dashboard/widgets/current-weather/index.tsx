@@ -35,7 +35,7 @@ function CurrentWeatherWidget() {
         // Try to get user's location
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
-            async (position) => {
+            async position => {
               try {
                 const { latitude, longitude } = position.coords;
                 const data = await WeatherService.getCurrentLocationWeather(latitude, longitude);
@@ -58,7 +58,7 @@ function CurrentWeatherWidget() {
               } finally {
                 setLoading(false);
               }
-            }
+            },
           );
         } else {
           // Geolocation not supported, use default location
@@ -123,7 +123,7 @@ function CurrentWeatherWidget() {
           📍 {locationName}
         </Box>
       </Box>
-      
+
       <ColumnLayout columns={2} variant="text-grid">
         <div>
           <Box variant="awsui-key-label">Humidity</Box>
@@ -147,9 +147,7 @@ function CurrentWeatherWidget() {
         </div>
         <div>
           <Box variant="awsui-key-label">Status</Box>
-          <StatusIndicator type="success">
-            {current.is_day ? 'Day' : 'Night'}
-          </StatusIndicator>
+          <StatusIndicator type="success">{current.is_day ? 'Day' : 'Night'}</StatusIndicator>
         </div>
       </ColumnLayout>
     </ColumnLayout>

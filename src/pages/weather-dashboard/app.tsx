@@ -16,9 +16,7 @@ function WeatherMainInfo() {
   return (
     <div>
       <h3>About Weather Dashboard</h3>
-      <p>
-        This weather dashboard provides real-time weather information and forecasts using the Open-Meteo API.
-      </p>
+      <p>This weather dashboard provides real-time weather information and forecasts using the Open-Meteo API.</p>
       <h4>Features:</h4>
       <ul>
         <li>Current weather conditions with detailed metrics</li>
@@ -29,8 +27,8 @@ function WeatherMainInfo() {
       </ul>
       <h4>Data Source:</h4>
       <p>
-        Weather data is provided by Open-Meteo, a free and open-source weather API that offers 
-        accurate weather forecasts without requiring API keys.
+        Weather data is provided by Open-Meteo, a free and open-source weather API that offers accurate weather
+        forecasts without requiring API keys.
       </p>
     </div>
   );
@@ -58,11 +56,11 @@ export function App() {
           </SpaceBetween>
         }
         breadcrumbs={
-          <Breadcrumbs 
+          <Breadcrumbs
             items={[
               { text: 'Home', href: '#/' },
-              { text: 'Weather Dashboard', href: '#/weather-dashboard' }
-            ]} 
+              { text: 'Weather Dashboard', href: '#/weather-dashboard' },
+            ]}
           />
         }
         navigationHide

@@ -32,7 +32,7 @@ function TemperatureChartWidget() {
 
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
-            async (position) => {
+            async position => {
               try {
                 const { latitude, longitude } = position.coords;
                 const data = await WeatherService.getCurrentLocationWeather(latitude, longitude);
@@ -52,7 +52,7 @@ function TemperatureChartWidget() {
               } finally {
                 setLoading(false);
               }
-            }
+            },
           );
         } else {
           try {
@@ -110,9 +110,9 @@ function TemperatureChartWidget() {
   ];
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: 'numeric', 
-      hour12: true 
+    return date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      hour12: true,
     });
   };
 
@@ -121,15 +121,12 @@ function TemperatureChartWidget() {
       <LineChart
         series={chartData}
         xDomain={[next24Hours[0]?.x, next24Hours[next24Hours.length - 1]?.x]}
-        yDomain={[
-          Math.min(...next24Hours.map(d => d.y)) - 2,
-          Math.max(...next24Hours.map(d => d.y)) + 2,
-        ]}
+        yDomain={[Math.min(...next24Hours.map(d => d.y)) - 2, Math.max(...next24Hours.map(d => d.y)) + 2]}
         i18nStrings={{
           legendAriaLabel: 'Legend',
           chartAriaRoleDescription: 'Line chart showing temperature over the next 24 hours',
           xTickFormatter: formatTime,
-          yTickFormatter: (value) => `${Math.round(value)}°C`,
+          yTickFormatter: value => `${Math.round(value)}°C`,
         }}
         ariaLabel="Temperature trend over next 24 hours"
         errorText="Error loading data."

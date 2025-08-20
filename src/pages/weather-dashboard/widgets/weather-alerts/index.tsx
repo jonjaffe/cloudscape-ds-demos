@@ -33,7 +33,7 @@ function WeatherAlertsWidget() {
 
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
-            async (position) => {
+            async position => {
               try {
                 const { latitude, longitude } = position.coords;
                 const data = await WeatherService.getCurrentLocationWeather(latitude, longitude);
@@ -53,7 +53,7 @@ function WeatherAlertsWidget() {
               } finally {
                 setLoading(false);
               }
-            }
+            },
           );
         } else {
           try {
@@ -94,7 +94,7 @@ function WeatherAlertsWidget() {
   }
 
   const { current, hourly } = weatherData;
-  
+
   const generateAlerts = () => {
     const alerts = [];
 
@@ -176,7 +176,9 @@ function WeatherAlertsWidget() {
       {alerts.length === 0 ? (
         <Box textAlign="center" padding="xl">
           <StatusIndicator type="success">
-            <Box variant="h3" color="text-status-success">All Clear</Box>
+            <Box variant="h3" color="text-status-success">
+              All Clear
+            </Box>
           </StatusIndicator>
           <Box variant="p" margin={{ top: 's' }} color="text-body-secondary">
             No weather alerts at this time
@@ -184,35 +186,25 @@ function WeatherAlertsWidget() {
         </Box>
       ) : (
         alerts.map((alert, index) => (
-          <Alert
-            key={index}
-            type={alert.type}
-            header={`${alert.icon} ${alert.title}`}
-            dismissible
-          >
+          <Alert key={index} type={alert.type} header={`${alert.icon} ${alert.title}`} dismissible>
             {alert.message}
           </Alert>
         ))
       )}
 
       <Box>
-        <Box variant="h4" margin={{ bottom: 's' }}>Current Conditions Summary</Box>
+        <Box variant="h4" margin={{ bottom: 's' }}>
+          Current Conditions Summary
+        </Box>
         <SpaceBetween size="xs">
           <Box variant="small">
-            🌡️ Temperature: {Math.round(current.temperature_2m)}°C (feels like {Math.round(current.apparent_temperature)}°C)
+            🌡️ Temperature: {Math.round(current.temperature_2m)}°C (feels like{' '}
+            {Math.round(current.apparent_temperature)}°C)
           </Box>
-          <Box variant="small">
-            💧 Humidity: {current.relative_humidity_2m}%
-          </Box>
-          <Box variant="small">
-            💨 Wind: {Math.round(current.wind_speed_10m)} km/h
-          </Box>
-          <Box variant="small">
-            🌧️ Precipitation: {current.precipitation} mm
-          </Box>
-          <Box variant="small">
-            ☁️ Cloud Cover: {current.cloud_cover}%
-          </Box>
+          <Box variant="small">💧 Humidity: {current.relative_humidity_2m}%</Box>
+          <Box variant="small">💨 Wind: {Math.round(current.wind_speed_10m)} km/h</Box>
+          <Box variant="small">🌧️ Precipitation: {current.precipitation} mm</Box>
+          <Box variant="small">☁️ Cloud Cover: {current.cloud_cover}%</Box>
         </SpaceBetween>
       </Box>
     </SpaceBetween>

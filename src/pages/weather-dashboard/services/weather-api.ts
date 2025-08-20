@@ -81,7 +81,7 @@ export class WeatherService {
         'surface_pressure',
         'wind_speed_10m',
         'wind_direction_10m',
-        'wind_gusts_10m'
+        'wind_gusts_10m',
       ].join(','),
       hourly: [
         'temperature_2m',
@@ -89,7 +89,7 @@ export class WeatherService {
         'precipitation_probability',
         'precipitation',
         'weather_code',
-        'wind_speed_10m'
+        'wind_speed_10m',
       ].join(','),
       daily: [
         'weather_code',
@@ -98,17 +98,17 @@ export class WeatherService {
         'precipitation_sum',
         'precipitation_probability_max',
         'wind_speed_10m_max',
-        'wind_direction_10m_dominant'
+        'wind_direction_10m_dominant',
       ].join(','),
       timezone: 'auto',
-      forecast_days: '7'
+      forecast_days: '7',
     });
 
     const response = await fetch(`${BASE_URL}/forecast?${params}`);
     if (!response.ok) {
       throw new Error(`Weather API error: ${response.statusText}`);
     }
-    
+
     return response.json();
   }
 
@@ -117,14 +117,14 @@ export class WeatherService {
       name: query,
       count: '10',
       language: 'en',
-      format: 'json'
+      format: 'json',
     });
 
     const response = await fetch(`${GEOCODING_URL}/search?${params}`);
     if (!response.ok) {
       throw new Error(`Geocoding API error: ${response.statusText}`);
     }
-    
+
     return response.json();
   }
 
@@ -157,9 +157,9 @@ export class WeatherService {
       86: 'Heavy snow showers',
       95: 'Thunderstorm',
       96: 'Thunderstorm with slight hail',
-      99: 'Thunderstorm with heavy hail'
+      99: 'Thunderstorm with heavy hail',
     };
-    
+
     return weatherCodes[weatherCode] || 'Unknown';
   }
 

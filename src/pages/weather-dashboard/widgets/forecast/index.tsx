@@ -32,7 +32,7 @@ function ForecastWidget() {
 
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
-            async (position) => {
+            async position => {
               try {
                 const { latitude, longitude } = position.coords;
                 const data = await WeatherService.getCurrentLocationWeather(latitude, longitude);
@@ -52,7 +52,7 @@ function ForecastWidget() {
               } finally {
                 setLoading(false);
               }
-            }
+            },
           );
         } else {
           try {
@@ -114,7 +114,7 @@ function ForecastWidget() {
       {daily.time.map((date, index) => {
         const weatherIcon = WeatherService.getWeatherIcon(daily.weather_code[index], true);
         const weatherDescription = WeatherService.getWeatherDescription(daily.weather_code[index]);
-        
+
         return (
           <Box key={date} padding={{ vertical: 's', horizontal: 'm' }}>
             <ColumnLayout columns={4} variant="text-grid">
@@ -136,9 +136,7 @@ function ForecastWidget() {
                 </Box>
               </div>
               <div style={{ textAlign: 'right' }}>
-                <Box variant="small">
-                  💧 {daily.precipitation_probability_max[index]}%
-                </Box>
+                <Box variant="small">💧 {daily.precipitation_probability_max[index]}%</Box>
                 <Box variant="small" color="text-body-secondary">
                   🌧️ {daily.precipitation_sum[index].toFixed(1)}mm
                 </Box>
