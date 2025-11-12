@@ -127,9 +127,9 @@ export function App() {
         const results = (data.results ?? []).map<LocationOption>(r => ({
           value: buildLabel(r),
           label: buildLabel(r),
-          description: r.country_code ? `${r.country_code} • ${r.latitude.toFixed(2)}, ${r.longitude.toFixed(2)}` : `${
-            r.latitude
-          }, ${r.longitude}`,
+          description: r.country_code
+            ? `${r.country_code} • ${r.latitude.toFixed(2)}, ${r.longitude.toFixed(2)}`
+            : `${r.latitude}, ${r.longitude}`,
           lat: r.latitude,
           lon: r.longitude,
           tz: r.timezone,
@@ -246,12 +246,8 @@ export function App() {
   }, [forecast]);
 
   const currentPanel = (
-    <Container
-      header={<Header variant="h2">Current weather</Header>}
-    >
-      {loadingForecast && (
-        <StatusIndicator type="loading">Loading current conditions</StatusIndicator>
-      )}
+    <Container header={<Header variant="h2">Current weather</Header>}>
+      {loadingForecast && <StatusIndicator type="loading">Loading current conditions</StatusIndicator>}
       {!loadingForecast && selected && forecast?.current_weather && (
         <Grid
           gridDefinition={[
@@ -264,9 +260,7 @@ export function App() {
           <Box>
             <Box variant="awsui-key-label">Location</Box>
             <Box>{selected.value}</Box>
-            {selected.tz && (
-              <Box variant="small">Timezone: {selected.tz}</Box>
-            )}
+            {selected.tz && <Box variant="small">Timezone: {selected.tz}</Box>}
           </Box>
           <Box>
             <Box variant="awsui-key-label">Temperature</Box>
@@ -291,9 +285,7 @@ export function App() {
       {!loadingForecast && selected && !forecast?.current_weather && (
         <StatusIndicator type="warning">Current weather not available</StatusIndicator>
       )}
-      {!selected && (
-        <StatusIndicator type="info">Search for a city to view current conditions</StatusIndicator>
-      )}
+      {!selected && <StatusIndicator type="info">Search for a city to view current conditions</StatusIndicator>}
     </Container>
   );
 
@@ -378,9 +370,7 @@ export function App() {
               variant="h1"
               actions={
                 <SpaceBetween size="xs" direction="horizontal">
-                  {selected && (
-                    <Badge color="blue">{selected.value}</Badge>
-                  )}
+                  {selected && <Badge color="blue">{selected.value}</Badge>}
                 </SpaceBetween>
               }
             >
@@ -403,8 +393,7 @@ export function App() {
                 expandToViewport
               />
               <Box variant="small" margin={{ top: 's' }}>
-                Data by Open-Meteo •
-                {' '}
+                Data by Open-Meteo •{' '}
                 <Link href="https://open-meteo.com/" external>
                   open-meteo.com
                 </Link>
