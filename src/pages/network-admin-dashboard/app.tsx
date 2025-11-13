@@ -19,6 +19,7 @@ import BarChart from '@cloudscape-design/components/bar-chart';
 import Box from '@cloudscape-design/components/box';
 
 import '@cloudscape-design/global-styles/index.css';
+import './styles.scss';
 
 // Mock data for the charts
 const networkTrafficData = [
