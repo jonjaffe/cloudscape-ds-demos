@@ -211,12 +211,7 @@ export function App() {
 
               <Container
                 header={
-                  <Grid
-                    gridDefinition={[
-                      { colspan: { default: 12, xs: 6 } },
-                      { colspan: { default: 12, xs: 6 } },
-                    ]}
-                  >
+                  <Grid gridDefinition={[{ colspan: { default: 12, xs: 6 } }, { colspan: { default: 12, xs: 6 } }]}>
                     <TextFilter
                       filteringText={filterText}
                       filteringPlaceholder="Placeholder"
