@@ -17,6 +17,11 @@ import TopNavigation from '@cloudscape-design/components/top-navigation';
 import AreaChart from '@cloudscape-design/components/area-chart';
 import BarChart from '@cloudscape-design/components/bar-chart';
 import Box from '@cloudscape-design/components/box';
+import Modal from '@cloudscape-design/components/modal';
+import Form from '@cloudscape-design/components/form';
+import FormField from '@cloudscape-design/components/form-field';
+import Input from '@cloudscape-design/components/input';
+import Select from '@cloudscape-design/components/select';
 
 import '@cloudscape-design/global-styles/index.css';
 import './styles.scss';
@@ -80,7 +85,7 @@ const createTableItem = () => ({
   col7: 'Cell Value',
 });
 
-const tableItems = Array.from({ length: 12 }, (_, i) => ({
+const initialTableItems = Array.from({ length: 12 }, (_, i) => ({
   id: i + 1,
   ...createTableItem(),
 }));
@@ -89,6 +94,12 @@ export function App() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [filterText, setFilterText] = useState('');
   const [currentPageIndex, setCurrentPageIndex] = useState(1);
+  const [tableItems, setTableItems] = useState(initialTableItems);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [deviceName, setDeviceName] = useState('');
+  const [deviceType, setDeviceType] = useState({ label: 'Router', value: 'router' });
+  const [deviceIp, setDeviceIp] = useState('');
+  const [deviceStatus, setDeviceStatus] = useState({ label: 'Active', value: 'active' });
   const [flashbarItems, setFlashbarItems] = useState([
     {
       type: 'warning' as const,
@@ -98,6 +109,25 @@ export function App() {
       id: 'warning-message',
     },
   ]);
+
+  const handleAddDevice = () => {
+    const newDevice = {
+      id: tableItems.length + 1,
+      col1: deviceName || 'Cell Value',
+      col2: deviceType.label || 'Cell Value',
+      col3: deviceIp || 'Cell Value',
+      col4: deviceStatus.label || 'Cell Value',
+      col5: 'Cell Value',
+      col6: 'Cell Value',
+      col7: 'Cell Value',
+    };
+    setTableItems([...tableItems, newDevice]);
+    setIsModalVisible(false);
+    setDeviceName('');
+    setDeviceType({ label: 'Router', value: 'router' });
+    setDeviceIp('');
+    setDeviceStatus({ label: 'Active', value: 'active' });
+  };
 
   return (
     <>
@@ -316,7 +346,12 @@ export function App() {
                     variant="h2"
                     description="Devices on your local network"
                     actions={
-                      <Button variant="primary" iconAlign="right" iconName="external">
+                      <Button
+                        variant="primary"
+                        iconAlign="right"
+                        iconName="external"
+                        onClick={() => setIsModalVisible(true)}
+                      >
                         Add Device
                       </Button>
                     }
@@ -331,6 +366,73 @@ export function App() {
           </ContentLayout>
         }
       />
+
+      <Modal
+        onDismiss={() => setIsModalVisible(false)}
+        visible={isModalVisible}
+        header="Add New Device"
+        footer={
+          <Box float="right">
+            <SpaceBetween direction="horizontal" size="xs">
+              <Button variant="link" onClick={() => setIsModalVisible(false)}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={handleAddDevice}>
+                Add Device
+              </Button>
+            </SpaceBetween>
+          </Box>
+        }
+      >
+        <Form>
+          <SpaceBetween size="m">
+            <FormField label="Device Name" description="Enter a name for the device">
+              <Input
+                value={deviceName}
+                onChange={({ detail }) => setDeviceName(detail.value)}
+                placeholder="e.g., Office Router"
+              />
+            </FormField>
+
+            <FormField label="Device Type" description="Select the type of device">
+              <Select
+                selectedOption={deviceType}
+                onChange={({ detail }) => setDeviceType(detail.selectedOption)}
+                options={[
+                  { label: 'Router', value: 'router' },
+                  { label: 'Switch', value: 'switch' },
+                  { label: 'Access Point', value: 'access-point' },
+                  { label: 'Firewall', value: 'firewall' },
+                  { label: 'Server', value: 'server' },
+                  { label: 'Workstation', value: 'workstation' },
+                ]}
+                placeholder="Select device type"
+              />
+            </FormField>
+
+            <FormField label="IP Address" description="Enter the device IP address">
+              <Input
+                value={deviceIp}
+                onChange={({ detail }) => setDeviceIp(detail.value)}
+                placeholder="e.g., 192.168.1.1"
+              />
+            </FormField>
+
+            <FormField label="Status" description="Current device status">
+              <Select
+                selectedOption={deviceStatus}
+                onChange={({ detail }) => setDeviceStatus(detail.selectedOption)}
+                options={[
+                  { label: 'Active', value: 'active' },
+                  { label: 'Inactive', value: 'inactive' },
+                  { label: 'Maintenance', value: 'maintenance' },
+                ]}
+                placeholder="Select status"
+              />
+            </FormField>
+          </SpaceBetween>
+        </Form>
+      </Modal>
     </>
   );
 }
