@@ -256,13 +256,7 @@ export function App() {
                     pageLabel: (pageNumber) => `Page ${pageNumber} of all pages`,
                   }}
                 />
-                <ButtonDropdown items={[{ id: 'settings', text: 'Settings', iconName: 'settings' }]}>
-                  <Box variant="span">
-                    <span className="awsui-util-action-stripe-group">
-                      <span className="awsui-util-action-stripe-group">Settings</span>
-                    </span>
-                  </Box>
-                </ButtonDropdown>
+                <Button iconName="settings" variant="icon" ariaLabel="Settings" />
               </div>
             </SpaceBetween>
 
