@@ -16,7 +16,6 @@ import Table from '@cloudscape-design/components/table';
 import Box from '@cloudscape-design/components/box';
 import TextFilter from '@cloudscape-design/components/text-filter';
 import Pagination from '@cloudscape-design/components/pagination';
-import ButtonDropdown from '@cloudscape-design/components/button-dropdown';
 
 export function App() {
   const [filteringText, setFilteringText] = useState('');
