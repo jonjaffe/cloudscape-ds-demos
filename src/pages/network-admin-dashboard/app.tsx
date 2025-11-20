@@ -97,43 +97,43 @@ export function App() {
     {
       id: 'name',
       header: 'Column header',
-      cell: (item: typeof deviceItems[0]) => item.name,
+      cell: (item: (typeof deviceItems)[0]) => item.name,
       sortingField: 'name',
     },
     {
       id: 'status',
       header: 'Column header',
-      cell: (item: typeof deviceItems[0]) => item.status,
+      cell: (item: (typeof deviceItems)[0]) => item.status,
       sortingField: 'status',
     },
     {
       id: 'type',
       header: 'Column header',
-      cell: (item: typeof deviceItems[0]) => item.type,
+      cell: (item: (typeof deviceItems)[0]) => item.type,
       sortingField: 'type',
     },
     {
       id: 'location',
       header: 'Column header',
-      cell: (item: typeof deviceItems[0]) => item.location,
+      cell: (item: (typeof deviceItems)[0]) => item.location,
       sortingField: 'location',
     },
     {
       id: 'owner',
       header: 'Column header',
-      cell: (item: typeof deviceItems[0]) => item.owner,
+      cell: (item: (typeof deviceItems)[0]) => item.owner,
       sortingField: 'owner',
     },
     {
       id: 'modified',
       header: 'Column header',
-      cell: (item: typeof deviceItems[0]) => item.modified,
+      cell: (item: (typeof deviceItems)[0]) => item.modified,
       sortingField: 'modified',
     },
     {
       id: 'tags',
       header: 'Column header',
-      cell: (item: typeof deviceItems[0]) => item.tags,
+      cell: (item: (typeof deviceItems)[0]) => item.tags,
       sortingField: 'tags',
     },
   ];
@@ -252,7 +252,7 @@ export function App() {
                   ariaLabels={{
                     nextPageLabel: 'Next page',
                     previousPageLabel: 'Previous page',
-                    pageLabel: (pageNumber) => `Page ${pageNumber} of all pages`,
+                    pageLabel: pageNumber => `Page ${pageNumber} of all pages`,
                   }}
                 />
                 <Button iconName="settings" variant="icon" ariaLabel="Settings" />
@@ -273,8 +273,8 @@ export function App() {
                     filterSelectedAriaLabel: 'selected',
                     legendAriaLabel: 'Legend',
                     chartAriaRoleDescription: 'area chart',
-                    xTickFormatter: (value) => `x${value}`,
-                    yTickFormatter: (value) => `y${value}`,
+                    xTickFormatter: value => `x${value}`,
+                    yTickFormatter: value => `y${value}`,
                   }}
                   ariaLabel="Network traffic area chart"
                   height={300}
@@ -321,8 +321,8 @@ export function App() {
                     filterSelectedAriaLabel: 'selected',
                     legendAriaLabel: 'Legend',
                     chartAriaRoleDescription: 'bar chart',
-                    xTickFormatter: (value) => `x${value}`,
-                    yTickFormatter: (value) => `y${value}`,
+                    xTickFormatter: value => `x${value}`,
+                    yTickFormatter: value => `y${value}`,
                   }}
                   ariaLabel="Credit usage bar chart"
                   height={300}
