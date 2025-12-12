@@ -67,12 +67,7 @@ export function App() {
         >
           <SpaceBetween size="l">
             <Container>
-              <Grid
-                gridDefinition={[
-                  { colspan: { default: 12, s: 8 } },
-                  { colspan: { default: 12, s: 4 } },
-                ]}
-              >
+              <Grid gridDefinition={[{ colspan: { default: 12, s: 8 } }, { colspan: { default: 12, s: 4 } }]}>
                 <TextFilter
                   filteringText={filteringText}
                   filteringPlaceholder="Placeholder"
@@ -92,12 +87,7 @@ export function App() {
               </Grid>
             </Container>
 
-            <Grid
-              gridDefinition={[
-                { colspan: { default: 12, m: 6 } },
-                { colspan: { default: 12, m: 6 } },
-              ]}
-            >
+            <Grid gridDefinition={[{ colspan: { default: 12, m: 6 } }, { colspan: { default: 12, m: 6 } }]}>
               <NetworkTrafficChart />
               <CreditUsageChart />
             </Grid>
