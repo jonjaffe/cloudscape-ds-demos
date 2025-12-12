@@ -3,7 +3,6 @@
 import React from 'react';
 
 import BarChart from '@cloudscape-design/components/bar-chart';
-import Box from '@cloudscape-design/components/box';
 import Container from '@cloudscape-design/components/container';
 
 export function CreditUsageChart() {
@@ -29,10 +28,6 @@ export function CreditUsageChart() {
         ariaLabel="Credit usage bar chart"
         xTitle="Day"
         yTitle="Credit Usage"
-        legendTitle="Legend"
-        i18nStrings={{
-          yTickFormatter: (value) => `y${value}`,
-        }}
         hideFilter
         statusType="finished"
       />
