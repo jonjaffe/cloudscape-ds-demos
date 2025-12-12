@@ -56,6 +56,7 @@ export function App() {
                   {
                     type: 'warning',
                     dismissible: true,
+                    dismissLabel: 'Dismiss',
                     content: 'This is a warning message',
                     id: 'warning-1',
                   },
@@ -65,7 +66,7 @@ export function App() {
           }
         >
           <SpaceBetween size="l">
-            <div className="search-pagination-wrapper">
+            <Container>
               <Grid
                 gridDefinition={[
                   { colspan: { default: 12, s: 8 } },
@@ -89,7 +90,7 @@ export function App() {
                   </SpaceBetween>
                 </div>
               </Grid>
-            </div>
+            </Container>
 
             <Grid
               gridDefinition={[
