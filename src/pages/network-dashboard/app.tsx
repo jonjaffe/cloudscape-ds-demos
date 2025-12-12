@@ -18,6 +18,7 @@ import Icon from '@cloudscape-design/components/icon';
 import { NetworkTrafficChart } from './components/network-traffic-chart';
 import { CreditUsageChart } from './components/credit-usage-chart';
 import { DevicesTable } from './components/devices-table';
+import './styles.css';
 
 export function App() {
   const [filteringText, setFilteringText] = useState('');
