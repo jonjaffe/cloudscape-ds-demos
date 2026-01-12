@@ -123,74 +123,78 @@ export function App() {
             )}
 
             <Grid gridDefinition={[{ colspan: 6 }, { colspan: 6 }]}>
-              <Container>
-                <LineChart
-                  series={networkTrafficSeries}
-                  xDomain={[0, 12]}
-                  yDomain={[0, 6]}
-                  height={300}
-                  hideFilter
-                  statusType="finished"
-                  detailPopoverSize="medium"
-                  xTitle="Day"
-                  yTitle="y"
-                  ariaLabel="Network traffic"
-                  i18nStrings={{
-                    legendAriaLabel: 'Legend',
-                    chartAriaRoleDescription: 'line chart',
-                    xTickFormatter: (value) => `x${value + 1}`,
-                    yTickFormatter: (value) => `y${value}`,
-                  }}
-                  legendTitle="Network traffic"
-                />
-                <Box variant="small" color="text-body-secondary" margin={{ top: 's' }}>
-                  <SpaceBetween direction="horizontal" size="m">
-                    <div className="chart-legend-item">
-                      <span className="legend-marker site-1"></span>
-                      Site 1
-                    </div>
-                    <div className="chart-legend-item">
-                      <span className="legend-marker site-2"></span>
-                      Site 2
-                    </div>
-                    <div className="chart-legend-item">
-                      <span className="legend-marker performance-goal"></span>
-                      Performance goal
-                    </div>
-                  </SpaceBetween>
-                </Box>
+              <Container header={<Header variant="h2">Network traffic</Header>}>
+                <SpaceBetween size="m">
+                  <LineChart
+                    series={networkTrafficSeries}
+                    xDomain={[0, 11]}
+                    yDomain={[0, 6]}
+                    height={280}
+                    hideFilter
+                    hideLegend
+                    statusType="finished"
+                    detailPopoverSize="medium"
+                    xTitle="Day"
+                    yTitle=""
+                    ariaLabel="Network traffic"
+                    i18nStrings={{
+                      legendAriaLabel: 'Legend',
+                      chartAriaRoleDescription: 'area chart',
+                      xTickFormatter: (value) => `x${Math.floor(value) + 1}`,
+                      yTickFormatter: (value) => `y${value}`,
+                    }}
+                  />
+                  <Box variant="small" color="text-body-secondary">
+                    <SpaceBetween direction="horizontal" size="m">
+                      <div className="chart-legend-item">
+                        <span className="legend-marker site-1"></span>
+                        Site 1
+                      </div>
+                      <div className="chart-legend-item">
+                        <span className="legend-marker site-2"></span>
+                        Site 2
+                      </div>
+                      <div className="chart-legend-item">
+                        <span className="legend-marker performance-goal"></span>
+                        Performance goal
+                      </div>
+                    </SpaceBetween>
+                  </Box>
+                </SpaceBetween>
               </Container>
 
-              <Container>
-                <BarChart
-                  series={creditUsageSeries}
-                  xDomain={['x1', 'x2', 'x3', 'x4', 'x5']}
-                  yDomain={[0, 6]}
-                  height={300}
-                  hideFilter
-                  statusType="finished"
-                  xTitle="Day"
-                  yTitle="y"
-                  ariaLabel="Credit usage"
-                  i18nStrings={{
-                    legendAriaLabel: 'Legend',
-                    chartAriaRoleDescription: 'bar chart',
-                    yTickFormatter: (value) => `y${value}`,
-                  }}
-                  legendTitle="Credit Usage"
-                />
-                <Box variant="small" color="text-body-secondary" margin={{ top: 's' }}>
-                  <SpaceBetween direction="horizontal" size="m">
-                    <div className="chart-legend-item">
-                      <span className="legend-marker site-1"></span>
-                      Site 1
-                    </div>
-                    <div className="chart-legend-item">
-                      <span className="legend-marker performance-goal"></span>
-                      Performance goal
-                    </div>
-                  </SpaceBetween>
-                </Box>
+              <Container header={<Header variant="h2">Credit Usage</Header>}>
+                <SpaceBetween size="m">
+                  <BarChart
+                    series={creditUsageSeries}
+                    xDomain={['x1', 'x2', 'x3', 'x4', 'x5']}
+                    yDomain={[0, 6]}
+                    height={280}
+                    hideFilter
+                    hideLegend
+                    statusType="finished"
+                    xTitle="Day"
+                    yTitle=""
+                    ariaLabel="Credit usage"
+                    i18nStrings={{
+                      legendAriaLabel: 'Legend',
+                      chartAriaRoleDescription: 'bar chart',
+                      yTickFormatter: (value) => `y${value}`,
+                    }}
+                  />
+                  <Box variant="small" color="text-body-secondary">
+                    <SpaceBetween direction="horizontal" size="m">
+                      <div className="chart-legend-item">
+                        <span className="legend-marker bar-site-1"></span>
+                        Site 1
+                      </div>
+                      <div className="chart-legend-item">
+                        <span className="legend-marker performance-goal"></span>
+                        Performance goal
+                      </div>
+                    </SpaceBetween>
+                  </Box>
+                </SpaceBetween>
               </Container>
             </Grid>
 
