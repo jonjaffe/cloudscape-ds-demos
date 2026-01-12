@@ -28,37 +28,37 @@ export function App() {
     {
       id: 'column1',
       header: 'Column header',
-      cell: (item: typeof devicesData[0]) => item.column1,
+      cell: (item: (typeof devicesData)[0]) => item.column1,
     },
     {
       id: 'column2',
       header: 'Column header',
-      cell: (item: typeof devicesData[0]) => item.column2,
+      cell: (item: (typeof devicesData)[0]) => item.column2,
     },
     {
       id: 'column3',
       header: 'Column header',
-      cell: (item: typeof devicesData[0]) => item.column3,
+      cell: (item: (typeof devicesData)[0]) => item.column3,
     },
     {
       id: 'column4',
       header: 'Column header',
-      cell: (item: typeof devicesData[0]) => item.column4,
+      cell: (item: (typeof devicesData)[0]) => item.column4,
     },
     {
       id: 'column5',
       header: 'Column header',
-      cell: (item: typeof devicesData[0]) => item.column5,
+      cell: (item: (typeof devicesData)[0]) => item.column5,
     },
     {
       id: 'column6',
       header: 'Column header',
-      cell: (item: typeof devicesData[0]) => item.column6,
+      cell: (item: (typeof devicesData)[0]) => item.column6,
     },
     {
       id: 'column7',
       header: 'Column header',
-      cell: (item: typeof devicesData[0]) => item.column7,
+      cell: (item: (typeof devicesData)[0]) => item.column7,
     },
   ];
 
@@ -140,8 +140,8 @@ export function App() {
                     i18nStrings={{
                       legendAriaLabel: 'Legend',
                       chartAriaRoleDescription: 'area chart',
-                      xTickFormatter: (value) => `x${Math.floor(value) + 1}`,
-                      yTickFormatter: (value) => `y${value}`,
+                      xTickFormatter: value => `x${Math.floor(value) + 1}`,
+                      yTickFormatter: value => `y${value}`,
                     }}
                   />
                   <Box variant="small" color="text-body-secondary">
@@ -179,7 +179,7 @@ export function App() {
                     i18nStrings={{
                       legendAriaLabel: 'Legend',
                       chartAriaRoleDescription: 'bar chart',
-                      yTickFormatter: (value) => `y${value}`,
+                      yTickFormatter: value => `y${value}`,
                     }}
                   />
                   <Box variant="small" color="text-body-secondary">
