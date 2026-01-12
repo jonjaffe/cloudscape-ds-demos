@@ -2,23 +2,22 @@
 // SPDX-License-Identifier: MIT-0
 import React, { useState } from 'react';
 
-import AppLayout from '@cloudscape-design/components/app-layout';
+import BarChart from '@cloudscape-design/components/bar-chart';
+import Box from '@cloudscape-design/components/box';
 import BreadcrumbGroup from '@cloudscape-design/components/breadcrumb-group';
 import Button from '@cloudscape-design/components/button';
+import Container from '@cloudscape-design/components/container';
 import Flashbar from '@cloudscape-design/components/flashbar';
 import Grid from '@cloudscape-design/components/grid';
 import Header from '@cloudscape-design/components/header';
 import LineChart from '@cloudscape-design/components/line-chart';
-import BarChart from '@cloudscape-design/components/bar-chart';
 import Pagination from '@cloudscape-design/components/pagination';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Table from '@cloudscape-design/components/table';
 import TextFilter from '@cloudscape-design/components/text-filter';
-import Box from '@cloudscape-design/components/box';
-import Container from '@cloudscape-design/components/container';
 
-import { Navigation } from '../commons/common-components';
-import { networkTrafficSeries, creditUsageSeries, devicesData } from './data';
+import { CustomAppLayout, Navigation } from '../commons/common-components';
+import { creditUsageSeries, devicesData, networkTrafficSeries } from './data';
 
 export function App() {
   const [filteringText, setFilteringText] = useState('');
@@ -64,7 +63,7 @@ export function App() {
   ];
 
   return (
-    <AppLayout
+    <CustomAppLayout
       navigation={<Navigation activeHref="#/network-admin-dashboard" />}
       toolsHide
       content={
