@@ -1,13 +1,13 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import { LineChartProps } from '@cloudscape-design/components/line-chart';
+import { AreaChartProps } from '@cloudscape-design/components/area-chart';
 import { BarChartProps } from '@cloudscape-design/components/bar-chart';
 
-// Network traffic data (area chart - using line type with area styling)
-export const networkTrafficSeries: LineChartProps<number>['series'] = [
+// Network traffic data (area chart)
+export const networkTrafficSeries: AreaChartProps<number>['series'] = [
   {
     title: 'Site 1',
-    type: 'line',
+    type: 'area',
     data: [
       { x: 0, y: 3 },
       { x: 1, y: 3.2 },
@@ -26,7 +26,7 @@ export const networkTrafficSeries: LineChartProps<number>['series'] = [
   },
   {
     title: 'Site 2',
-    type: 'line',
+    type: 'area',
     data: [
       { x: 0, y: 2 },
       { x: 1, y: 2.1 },
