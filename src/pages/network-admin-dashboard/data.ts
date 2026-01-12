@@ -3,11 +3,11 @@
 import { LineChartProps } from '@cloudscape-design/components/line-chart';
 import { BarChartProps } from '@cloudscape-design/components/bar-chart';
 
-// Network traffic data (area chart)
+// Network traffic data (area chart - using line type with area styling)
 export const networkTrafficSeries: LineChartProps<number>['series'] = [
   {
     title: 'Site 1',
-    type: 'area',
+    type: 'line',
     data: [
       { x: 0, y: 3 },
       { x: 1, y: 3.2 },
@@ -22,11 +22,11 @@ export const networkTrafficSeries: LineChartProps<number>['series'] = [
       { x: 10, y: 4.8 },
       { x: 11, y: 4.2 },
     ],
-    valueFormatter: (value) => value.toFixed(1),
+    valueFormatter: (value: number) => value.toFixed(1),
   },
   {
     title: 'Site 2',
-    type: 'area',
+    type: 'line',
     data: [
       { x: 0, y: 2 },
       { x: 1, y: 2.1 },
@@ -41,13 +41,13 @@ export const networkTrafficSeries: LineChartProps<number>['series'] = [
       { x: 10, y: 3.2 },
       { x: 11, y: 2.8 },
     ],
-    valueFormatter: (value) => value.toFixed(1),
+    valueFormatter: (value: number) => value.toFixed(1),
   },
   {
     title: 'Performance goal',
     type: 'threshold',
     y: 3.3,
-    valueFormatter: (value) => value.toFixed(1),
+    valueFormatter: (value: number) => value.toFixed(1),
   },
 ];
 
@@ -63,7 +63,7 @@ export const creditUsageSeries: BarChartProps<string>['series'] = [
       { x: 'x4', y: 3 },
       { x: 'x5', y: 5 },
     ],
-    valueFormatter: (value) => value.toFixed(1),
+    valueFormatter: (value: number) => value.toFixed(1),
   },
 ];
 
