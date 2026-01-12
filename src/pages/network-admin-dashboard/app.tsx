@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 import React, { useState } from 'react';
 
+import AreaChart from '@cloudscape-design/components/area-chart';
 import BarChart from '@cloudscape-design/components/bar-chart';
 import Box from '@cloudscape-design/components/box';
 import BreadcrumbGroup from '@cloudscape-design/components/breadcrumb-group';
@@ -10,7 +11,6 @@ import Container from '@cloudscape-design/components/container';
 import Flashbar from '@cloudscape-design/components/flashbar';
 import Grid from '@cloudscape-design/components/grid';
 import Header from '@cloudscape-design/components/header';
-import LineChart from '@cloudscape-design/components/line-chart';
 import Pagination from '@cloudscape-design/components/pagination';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Table from '@cloudscape-design/components/table';
@@ -125,7 +125,7 @@ export function App() {
             <Grid gridDefinition={[{ colspan: 6 }, { colspan: 6 }]}>
               <Container header={<Header variant="h2">Network traffic</Header>}>
                 <SpaceBetween size="m">
-                  <LineChart
+                  <AreaChart
                     series={networkTrafficSeries}
                     xDomain={[0, 11]}
                     yDomain={[0, 6]}
