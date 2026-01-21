@@ -42,20 +42,7 @@ export function NetworkTrafficChart() {
             valueFormatter: () => 'y3',
           },
         ]}
-        xDomain={[
-          'x1',
-          'x2',
-          'x3',
-          'x4',
-          'x5',
-          'x6',
-          'x7',
-          'x8',
-          'x9',
-          'x10',
-          'x11',
-          'x12',
-        ]}
+        xDomain={['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9', 'x10', 'x11', 'x12']}
         yDomain={[0, 6]}
         i18nStrings={{
           filterLabel: 'Filter displayed data',

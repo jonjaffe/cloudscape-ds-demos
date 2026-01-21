@@ -55,10 +55,7 @@ export function DevicesTable() {
   );
 
   // Paginate the filtered devices
-  const paginatedDevices = filteredDevices.slice(
-    (currentPageIndex - 1) * pageSize,
-    currentPageIndex * pageSize,
-  );
+  const paginatedDevices = filteredDevices.slice((currentPageIndex - 1) * pageSize, currentPageIndex * pageSize);
 
   return (
     <Table
