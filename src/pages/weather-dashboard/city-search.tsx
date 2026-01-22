@@ -22,7 +22,7 @@ export function CitySearch({ onLocationSelect, loading = false }: CitySearchProp
   const [searchLoading, setSearchLoading] = useState(false);
 
   const handleSearch = useCallback(
-    async (event: any) => {
+    async (event: { detail: { value: string } }) => {
       const searchValue = event.detail.value;
       setValue(searchValue);
 
@@ -51,8 +51,8 @@ export function CitySearch({ onLocationSelect, loading = false }: CitySearchProp
   );
 
   const handleSelect = useCallback(
-    (event: any) => {
-      const selected = event.detail.selectedOption as LocationOption | undefined;
+    (event: { detail: { selectedOption: LocationOption } }) => {
+      const selected = event.detail.selectedOption;
       if (selected) {
         setValue(selected.value);
         setSuggestions([]);
