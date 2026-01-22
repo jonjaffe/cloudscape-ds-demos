@@ -21,34 +21,31 @@ export function CitySearch({ onLocationSelect, loading = false }: CitySearchProp
   const [suggestions, setSuggestions] = useState<LocationOption[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
 
-  const handleSearch = useCallback(
-    async (event: { detail: { value: string } }) => {
-      const searchValue = event.detail.value;
-      setValue(searchValue);
+  const handleSearch = useCallback(async (event: { detail: { value: string } }) => {
+    const searchValue = event.detail.value;
+    setValue(searchValue);
 
-      if (searchValue.length < 2) {
-        setSuggestions([]);
-        return;
-      }
+    if (searchValue.length < 2) {
+      setSuggestions([]);
+      return;
+    }
 
-      setSearchLoading(true);
-      try {
-        const results = await searchLocations(searchValue);
-        const options = results.map(location => ({
-          value: `${location.name}${location.admin1 ? ', ' + location.admin1 : ''}, ${location.country}`,
-          label: `${location.name}${location.admin1 ? ', ' + location.admin1 : ''}, ${location.country}`,
-          location,
-        }));
-        setSuggestions(options);
-      } catch (error) {
-        console.error('Search error:', error);
-        setSuggestions([]);
-      } finally {
-        setSearchLoading(false);
-      }
-    },
-    []
-  );
+    setSearchLoading(true);
+    try {
+      const results = await searchLocations(searchValue);
+      const options = results.map(location => ({
+        value: `${location.name}${location.admin1 ? ', ' + location.admin1 : ''}, ${location.country}`,
+        label: `${location.name}${location.admin1 ? ', ' + location.admin1 : ''}, ${location.country}`,
+        location,
+      }));
+      setSuggestions(options);
+    } catch (error) {
+      console.error('Search error:', error);
+      setSuggestions([]);
+    } finally {
+      setSearchLoading(false);
+    }
+  }, []);
 
   const handleSelect = useCallback(
     (event: { detail: { selectedOption: LocationOption } }) => {
@@ -59,7 +56,7 @@ export function CitySearch({ onLocationSelect, loading = false }: CitySearchProp
         onLocationSelect(selected.location);
       }
     },
-    [onLocationSelect]
+    [onLocationSelect],
   );
 
   return (

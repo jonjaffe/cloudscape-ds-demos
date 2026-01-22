@@ -102,7 +102,9 @@ export function WeatherDisplay({ location, weather }: WeatherDisplayProps) {
               <Box variant="small" color="text-body-secondary">
                 Coordinates
               </Box>
-              <Box variant="h4">{weather.latitude.toFixed(2)}°N, {weather.longitude.toFixed(2)}°W</Box>
+              <Box variant="h4">
+                {weather.latitude.toFixed(2)}°N, {weather.longitude.toFixed(2)}°W
+              </Box>
             </Box>
 
             <Box margin={{ bottom: 's' }}>
