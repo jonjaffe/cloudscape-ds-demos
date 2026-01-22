@@ -10,26 +10,36 @@ interface CitySearchProps {
   loading?: boolean;
 }
 
+interface LocationOption {
+  value: string;
+  label: string;
+  location: Location;
+}
+
 export function CitySearch({ onLocationSelect, loading = false }: CitySearchProps) {
   const [value, setValue] = useState('');
-  const [suggestions, setSuggestions] = useState<Location[]>([]);
+  const [suggestions, setSuggestions] = useState<LocationOption[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
 
   const handleSearch = useCallback(
-    async (detail: { value: string }) => {
-      setValue(detail.value);
-      setSelectedLocation(null);
+    async (event: any) => {
+      const searchValue = event.detail.value;
+      setValue(searchValue);
 
-      if (detail.value.length < 2) {
+      if (searchValue.length < 2) {
         setSuggestions([]);
         return;
       }
 
       setSearchLoading(true);
       try {
-        const results = await searchLocations(detail.value);
-        setSuggestions(results);
+        const results = await searchLocations(searchValue);
+        const options = results.map(location => ({
+          value: `${location.name}${location.admin1 ? ', ' + location.admin1 : ''}, ${location.country}`,
+          label: `${location.name}${location.admin1 ? ', ' + location.admin1 : ''}, ${location.country}`,
+          location,
+        }));
+        setSuggestions(options);
       } catch (error) {
         console.error('Search error:', error);
         setSuggestions([]);
@@ -41,13 +51,12 @@ export function CitySearch({ onLocationSelect, loading = false }: CitySearchProp
   );
 
   const handleSelect = useCallback(
-    (detail: { value: string; selectedOption?: any }) => {
-      const selected = detail.selectedOption as Location | undefined;
+    (event: any) => {
+      const selected = event.detail.selectedOption as LocationOption | undefined;
       if (selected) {
-        setSelectedLocation(selected);
-        setValue(`${selected.name}${selected.admin1 ? ', ' + selected.admin1 : ''}, ${selected.country}`);
+        setValue(selected.value);
         setSuggestions([]);
-        onLocationSelect(selected);
+        onLocationSelect(selected.location);
       }
     },
     [onLocationSelect]
@@ -56,11 +65,7 @@ export function CitySearch({ onLocationSelect, loading = false }: CitySearchProp
   return (
     <Autosuggest
       value={value}
-      options={suggestions.map(location => ({
-        value: `${location.name}${location.admin1 ? ', ' + location.admin1 : ''}, ${location.country}`,
-        label: `${location.name}${location.admin1 ? ', ' + location.admin1 : ''}, ${location.country}`,
-        ...location,
-      }))}
+      options={suggestions}
       onChange={handleSearch}
       onSelect={handleSelect}
       placeholder="Search for a city..."
