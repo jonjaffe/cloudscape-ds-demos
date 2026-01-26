@@ -43,11 +43,9 @@ export interface ForecastData {
 
 export async function searchLocations(query: string): Promise<Location[]> {
   if (!query.trim()) return [];
-  
+
   try {
-    const response = await fetch(
-      `${GEOCODING_API}?name=${encodeURIComponent(query)}&count=10&language=en&format=json`
-    );
+    const response = await fetch(`${GEOCODING_API}?name=${encodeURIComponent(query)}&count=10&language=en&format=json`);
     const data: GeocodingResult = await response.json();
     return data.results || [];
   } catch (error) {
@@ -56,10 +54,7 @@ export async function searchLocations(query: string): Promise<Location[]> {
   }
 }
 
-export async function getWeatherForecast(
-  latitude: number,
-  longitude: number
-): Promise<ForecastData | null> {
+export async function getWeatherForecast(latitude: number, longitude: number): Promise<ForecastData | null> {
   try {
     const params = new URLSearchParams({
       latitude: latitude.toString(),
@@ -117,7 +112,7 @@ export function getWeatherIcon(code: number): string {
   if (code === 3) return '☁️';
   if (code === 45 || code === 48) return '🌫️';
   if ((code >= 51 && code <= 55) || (code >= 80 && code <= 82)) return '🌧️';
-  if ((code >= 61 && code <= 65)) return '🌧️';
+  if (code >= 61 && code <= 65) return '🌧️';
   if ((code >= 71 && code <= 75) || (code >= 85 && code <= 86)) return '❄️';
   if (code >= 95 && code <= 99) return '⛈️';
   return '🌤️';

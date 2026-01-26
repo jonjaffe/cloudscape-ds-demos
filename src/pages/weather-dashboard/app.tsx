@@ -22,7 +22,7 @@ export function App() {
   const handleLocationSelect = async (location: Location) => {
     setSelectedLocation(location);
     setIsLoading(true);
-    
+
     try {
       const data = await getWeatherForecast(location.latitude, location.longitude);
       setWeatherData(data);
@@ -38,17 +38,9 @@ export function App() {
       navigationHide
       toolsHide
       content={
-        <ContentLayout
-          header={
-            <Header variant="h1">
-              Weather Dashboard
-            </Header>
-          }
-        >
+        <ContentLayout header={<Header variant="h1">Weather Dashboard</Header>}>
           <SpaceBetween size="l">
-            <Container
-              header={<Header variant="h2">Find Weather by Location</Header>}
-            >
+            <Container header={<Header variant="h2">Find Weather by Location</Header>}>
               <CitySearch onLocationSelect={handleLocationSelect} isLoading={isLoading} />
             </Container>
 
@@ -63,9 +55,7 @@ export function App() {
             {!selectedLocation && !weatherData && (
               <Container>
                 <Box textAlign="center" padding="xxl" color="text-status-inactive">
-                  <Box variant="p">
-                    Search for a city above to see the weather forecast
-                  </Box>
+                  <Box variant="p">Search for a city above to see the weather forecast</Box>
                 </Box>
               </Container>
             )}

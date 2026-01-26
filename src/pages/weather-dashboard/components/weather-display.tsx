@@ -34,13 +34,7 @@ export function WeatherDisplay({ data, locationName, isLoading }: WeatherDisplay
 
   return (
     <SpaceBetween size="l">
-      <Container
-        header={
-          <Header variant="h2">
-            Current Weather in {locationName}
-          </Header>
-        }
-      >
+      <Container header={<Header variant="h2">Current Weather in {locationName}</Header>}>
         <Box className="current-weather">
           <Grid
             gridDefinition={[
@@ -51,12 +45,8 @@ export function WeatherDisplay({ data, locationName, isLoading }: WeatherDisplay
             ]}
           >
             <Box className="weather-card">
-              <div className="weather-icon">
-                {getWeatherIcon(current.weather_code)}
-              </div>
-              <div className="weather-description">
-                {getWeatherDescription(current.weather_code)}
-              </div>
+              <div className="weather-icon">{getWeatherIcon(current.weather_code)}</div>
+              <div className="weather-description">{getWeatherDescription(current.weather_code)}</div>
             </Box>
             <Box className="weather-card">
               <div className="weather-label">Temperature</div>
@@ -96,16 +86,12 @@ export function WeatherDisplay({ data, locationName, isLoading }: WeatherDisplay
                     day: 'numeric',
                   })}
                 </div>
-                <div className="forecast-icon">
-                  {getWeatherIcon(daily.weather_code[index])}
-                </div>
+                <div className="forecast-icon">{getWeatherIcon(daily.weather_code[index])}</div>
                 <div className="forecast-temps">
                   <div className="forecast-max">{Math.round(daily.temperature_2m_max[index])}°F</div>
                   <div className="forecast-min">{Math.round(daily.temperature_2m_min[index])}°F</div>
                 </div>
-                <div className="forecast-precip">
-                  💧 {Math.round(daily.precipitation_sum[index] * 10) / 10}mm
-                </div>
+                <div className="forecast-precip">💧 {Math.round(daily.precipitation_sum[index] * 10) / 10}mm</div>
               </Box>
             ))}
           </Grid>
