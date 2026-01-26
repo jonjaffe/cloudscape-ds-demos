@@ -21,10 +21,10 @@ export interface ForecastData {
   elevation: number;
   timezone: string;
   current: {
-    temperature: number;
+    temperature_2m: number;
     weather_code: number;
-    wind_speed: number;
-    relative_humidity: number;
+    wind_speed_10m: number;
+    relative_humidity_2m: number;
   };
   hourly: {
     time: string[];
