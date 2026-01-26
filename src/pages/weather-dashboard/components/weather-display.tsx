@@ -100,8 +100,8 @@ export function WeatherDisplay({ data, locationName, isLoading }: WeatherDisplay
                   {getWeatherIcon(daily.weather_code[index])}
                 </div>
                 <div className="forecast-temps">
-                  <div className="forecast-max">{Math.round(daily.temperature_2m_max[index])}°</div>
-                  <div className="forecast-min">{Math.round(daily.temperature_2m_min[index])}°</div>
+                  <div className="forecast-max">{Math.round(daily.temperature_2m_max[index])}°F</div>
+                  <div className="forecast-min">{Math.round(daily.temperature_2m_min[index])}°F</div>
                 </div>
                 <div className="forecast-precip">
                   💧 {Math.round(daily.precipitation_sum[index] * 10) / 10}mm
