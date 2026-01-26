@@ -68,6 +68,7 @@ export async function getWeatherForecast(
       hourly: 'temperature_2m,precipitation,weather_code',
       daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum',
       temperature_unit: 'fahrenheit',
+      wind_speed_unit: 'mph',
       timezone: 'auto',
     });
 
