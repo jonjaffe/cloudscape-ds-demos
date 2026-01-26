@@ -30,10 +30,13 @@ export function CitySearch({ onLocationSelect, isLoading = false }: CitySearchPr
     return () => clearTimeout(timer);
   }, [searchValue]);
 
-  const handleSelect = (location: Location) => {
-    setSearchValue('');
-    setSuggestions([]);
-    onLocationSelect(location);
+  const handleSelect = (selectedValue: string) => {
+    const index = parseInt(selectedValue);
+    if (suggestions[index]) {
+      setSearchValue('');
+      setSuggestions([]);
+      onLocationSelect(suggestions[index]);
+    }
   };
 
   return (
@@ -41,14 +44,13 @@ export function CitySearch({ onLocationSelect, isLoading = false }: CitySearchPr
       <Autosuggest
         onChange={({ detail }) => setSearchValue(detail.value)}
         value={searchValue}
-        options={suggestions.map(location => ({
-          value: location.id.toString(),
+        options={suggestions.map((location, index) => ({
+          value: index.toString(),
           label: `${location.name}${location.admin1 ? ', ' + location.admin1 : ''}, ${location.country}`,
-          location,
         }))}
         onSelect={({ detail }) => {
-          if (detail.value && detail.value.location) {
-            handleSelect(detail.value.location);
+          if (detail.value) {
+            handleSelect(detail.value);
           }
         }}
         placeholder="Search for a city..."
