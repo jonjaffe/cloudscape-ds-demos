@@ -60,15 +60,15 @@ export function WeatherDisplay({ data, locationName, isLoading }: WeatherDisplay
             </Box>
             <Box className="weather-card">
               <div className="weather-label">Temperature</div>
-              <div className="weather-value">{Math.round(current.temperature)}°</div>
+              <div className="weather-value">{Math.round(current.temperature_2m)}°F</div>
             </Box>
             <Box className="weather-card">
               <div className="weather-label">Humidity</div>
-              <div className="weather-value">{current.relative_humidity}%</div>
+              <div className="weather-value">{current.relative_humidity_2m}%</div>
             </Box>
             <Box className="weather-card">
               <div className="weather-label">Wind Speed</div>
-              <div className="weather-value">{Math.round(current.wind_speed)} km/h</div>
+              <div className="weather-value">{Math.round(current.wind_speed_10m)} mph</div>
             </Box>
           </Grid>
         </Box>
