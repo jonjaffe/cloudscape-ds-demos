@@ -18,9 +18,6 @@ import BarChart from '@cloudscape-design/components/bar-chart';
 import Table from '@cloudscape-design/components/table';
 import Box from '@cloudscape-design/components/box';
 
-import { Notifications } from '../commons';
-import { CustomAppLayout } from '../commons/common-components';
-
 // Mock data for Network Traffic chart
 const networkTrafficData = [
   {
