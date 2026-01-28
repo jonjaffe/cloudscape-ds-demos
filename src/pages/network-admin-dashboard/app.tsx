@@ -154,7 +154,7 @@ export function App() {
                 ]}
                 ariaLabel="Breadcrumbs"
               />
-              
+
               <Header
                 variant="h1"
                 description="Network Traffic, Credit Usage, and Your Devices"
@@ -213,8 +213,8 @@ export function App() {
                     detailPopoverDismissAriaLabel: 'Dismiss',
                     legendAriaLabel: 'Legend',
                     chartAriaRoleDescription: 'area chart',
-                    xTickFormatter: (value) => value,
-                    yTickFormatter: (value) => `y${value}`,
+                    xTickFormatter: value => value,
+                    yTickFormatter: value => `y${value}`,
                   }}
                   ariaLabel="Network traffic"
                   height={300}
@@ -259,8 +259,8 @@ export function App() {
                     detailPopoverDismissAriaLabel: 'Dismiss',
                     legendAriaLabel: 'Legend',
                     chartAriaRoleDescription: 'bar chart',
-                    xTickFormatter: (value) => value,
-                    yTickFormatter: (value) => `y${value}`,
+                    xTickFormatter: value => value,
+                    yTickFormatter: value => `y${value}`,
                   }}
                   ariaLabel="Credit Usage"
                   height={300}
