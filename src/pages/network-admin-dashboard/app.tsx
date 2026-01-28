@@ -1,6 +1,22 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import React from 'react';
+import React, { useState } from 'react';
+import AppLayout from '@cloudscape-design/components/app-layout';
+import BreadcrumbGroup from '@cloudscape-design/components/breadcrumb-group';
+import Button from '@cloudscape-design/components/button';
+import Header from '@cloudscape-design/components/header';
+import SpaceBetween from '@cloudscape-design/components/space-between';
+import ContentLayout from '@cloudscape-design/components/content-layout';
+import Container from '@cloudscape-design/components/container';
+import Grid from '@cloudscape-design/components/grid';
+import Flashbar from '@cloudscape-design/components/flashbar';
+import Input from '@cloudscape-design/components/input';
+import Pagination from '@cloudscape-design/components/pagination';
+import ButtonDropdown from '@cloudscape-design/components/button-dropdown';
+import AreaChart from '@cloudscape-design/components/area-chart';
+import BarChart from '@cloudscape-design/components/bar-chart';
+import Table from '@cloudscape-design/components/table';
+import Box from '@cloudscape-design/components/box';
 
 // Mock data for Network Traffic chart
 const networkTrafficData = [
