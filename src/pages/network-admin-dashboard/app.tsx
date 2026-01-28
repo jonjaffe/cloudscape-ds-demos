@@ -143,7 +143,9 @@ export function App() {
   const [flashbarVisible, setFlashbarVisible] = useState(true);
 
   return (
-    <CustomAppLayout
+    <AppLayout
+      navigationHide
+      toolsHide
       content={
         <ContentLayout
           header={
@@ -329,10 +331,6 @@ export function App() {
           </SpaceBetween>
         </ContentLayout>
       }
-      breadcrumbs={<div />}
-      navigationHide
-      toolsHide
-      notifications={<Notifications />}
     />
   );
 }
