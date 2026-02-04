@@ -48,18 +48,126 @@ const creditUsageData = [
 
 // Sample device data
 const deviceItems = [
-  { id: '1', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '2', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '3', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '4', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '5', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '6', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '7', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '8', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '9', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '10', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '11', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
-  { id: '12', name: 'Cell Value', status: 'Cell Value', type: 'Cell Value', ip: 'Cell Value', mac: 'Cell Value', location: 'Cell Value', lastSeen: 'Cell Value' },
+  {
+    id: '1',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '2',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '3',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '4',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '5',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '6',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '7',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '8',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '9',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '10',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '11',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
+  {
+    id: '12',
+    name: 'Cell Value',
+    status: 'Cell Value',
+    type: 'Cell Value',
+    ip: 'Cell Value',
+    mac: 'Cell Value',
+    location: 'Cell Value',
+    lastSeen: 'Cell Value',
+  },
 ];
 
 export function App() {
@@ -192,12 +300,7 @@ export function App() {
                 />
               )}
 
-              <Grid
-                gridDefinition={[
-                  { colspan: { default: 12, s: 6 } },
-                  { colspan: { default: 12, s: 6 } },
-                ]}
-              >
+              <Grid gridDefinition={[{ colspan: { default: 12, s: 6 } }, { colspan: { default: 12, s: 6 } }]}>
                 <Container
                   header={
                     <Header variant="h2" description="">
