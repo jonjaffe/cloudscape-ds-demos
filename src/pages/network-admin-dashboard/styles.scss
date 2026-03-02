@@ -1,0 +1,79 @@
+// Network Administration Dashboard Styles
+
+.dashboard-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 40px;
+}
+
+.dashboard-header-controls {
+  margin-top: 8px;
+}
+
+.dashboard-search-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dashboard-search-input {
+  flex: 1;
+  min-width: 200px;
+  max-width: 600px;
+}
+
+.dashboard-pagination-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+// Warning Banner
+.warning-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 34px 13px 33px;
+  border: 1px solid #e0b945;
+  background: #fff4b4;
+  border-radius: 4px;
+}
+
+.warning-banner__content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.warning-banner__icon {
+  flex-shrink: 0;
+}
+
+.warning-banner__message {
+  color: #946c00;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.warning-banner__dismiss {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #946c00;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
