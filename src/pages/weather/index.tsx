@@ -136,14 +136,12 @@ export default function WeatherDashboard() {
   };
 
   const handleLocationSelect = (detail: { value: string }) => {
-    const suggestion = locationSuggestions.find(
-      s => `${s.name}, ${s.country}` === detail.value || s.id.toString() === detail.value
-    );
+    const suggestion = locationSuggestions.find(s => s.id.toString() === detail.value);
 
     if (suggestion) {
-      fetchWeatherData(suggestion);
       setLocationSearch('');
       setLocationSuggestions([]);
+      fetchWeatherData(suggestion);
     }
   };
 
