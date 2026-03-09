@@ -1,0 +1,22 @@
+.dashboard-page-header {
+  width: 100%;
+}
+
+.dashboard-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dashboard-search-wrapper {
+  flex: 1;
+  max-width: 600px;
+}
+
+.dashboard-pagination-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
