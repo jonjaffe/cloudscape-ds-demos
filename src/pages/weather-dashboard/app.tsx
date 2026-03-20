@@ -1,17 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
-import {
-  Container,
-  Header,
-  SpaceBetween,
-  Box,
-  Autocomplete,
-  Button,
-  FormField,
-  Grid,
-  ColumnLayout,
-  Spinner,
-  Alert,
-} from '@cloudscape-design/components';
+import Container from '@cloudscape-design/components/container';
+import Header from '@cloudscape-design/components/header';
+import SpaceBetween from '@cloudscape-design/components/space-between';
+import Box from '@cloudscape-design/components/box';
+import Select, { SelectProps } from '@cloudscape-design/components/select';
+import Button from '@cloudscape-design/components/button';
+import FormField from '@cloudscape-design/components/form-field';
+import Grid from '@cloudscape-design/components/grid';
+import ColumnLayout from '@cloudscape-design/components/column-layout';
+import Spinner from '@cloudscape-design/components/spinner';
+import Alert from '@cloudscape-design/components/alert';
 import { CustomAppLayout } from '../commons/common-components';
 import { WeatherCard } from './components/weather-card';
 import { ForecastCard } from './components/forecast-card';
@@ -21,13 +19,14 @@ import styles from './styles.module.scss';
 
 export function App() {
   const [location, setLocation] = useState('New York');
-  const [inputValue, setInputValue] = useState('');
-  const [suggestions, setSuggestions] = useState<Array<{ label: string; value: Location }>>([]);
+  const [selectedOption, setSelectedOption] = useState<SelectProps.Option | null>(null);
+  const [suggestions, setSuggestions] = useState<SelectProps.Option[]>([]);
   const [loadingSuggestions, setLoadingSuggestions] = useState(false);
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
+  const locationsCache = useRef<Map<number, Location>>(new Map());
 
   const loadWeather = async (selectedLocation: Location | string) => {
     setLoading(true);
@@ -61,7 +60,7 @@ export function App() {
       const locationName = typeof selectedLocation === 'string' ? selectedLocation : coords.name;
       setWeatherData(data);
       setLocation(locationName);
-      setInputValue('');
+      setSelectedOption(null);
       setSuggestions([]);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch weather data');
@@ -70,11 +69,12 @@ export function App() {
     }
   };
 
-  const handleInputChange = async (value: string) => {
-    setInputValue(value);
+  const handleInputChange = async ({ detail }: { detail: { value: string } }) => {
+    const value = detail.value;
 
     if (!value.trim()) {
       setSuggestions([]);
+      setSelectedOption(null);
       return;
     }
 
@@ -87,10 +87,15 @@ export function App() {
     debounceTimer.current = setTimeout(async () => {
       try {
         const locations = await fetchGeocoding(value);
-        const formattedSuggestions = locations.map((loc) => ({
-          label: `${loc.name}${loc.admin1 ? ', ' + loc.admin1 : ''}${loc.country ? ', ' + loc.country : ''}`,
-          value: loc,
-        }));
+        locationsCache.current.clear();
+        const formattedSuggestions = locations.map((loc, index) => {
+          locationsCache.current.set(index, loc);
+          return {
+            label: `${loc.name}${loc.admin1 ? ', ' + loc.admin1 : ''}${loc.country ? ', ' + loc.country : ''}`,
+            value: index.toString(),
+            description: `${loc.latitude.toFixed(2)}°N, ${loc.longitude.toFixed(2)}°E`,
+          };
+        });
         setSuggestions(formattedSuggestions);
       } catch (err) {
         console.error('Failed to fetch suggestions:', err);
@@ -101,20 +106,22 @@ export function App() {
     }, 300);
   };
 
-  const handleSelectSuggestion = (location: Location) => {
-    loadWeather(location);
+  const handleSelectSuggestion = ({ detail }: { detail: { selectedOption: SelectProps.Option } }) => {
+    const option = detail.selectedOption;
+    if (option && option.value) {
+      const locationIndex = parseInt(option.value);
+      const location = locationsCache.current.get(locationIndex);
+      if (location) {
+        loadWeather(location);
+        setSelectedOption(option);
+      }
+    }
   };
 
   // Load weather for initial location
   useEffect(() => {
     loadWeather(location);
   }, []);
-
-  const handleSearch = () => {
-    if (inputValue.trim()) {
-      loadWeather(inputValue);
-    }
-  };
 
   // Cleanup debounce timer on unmount
   useEffect(() => {
@@ -136,24 +143,19 @@ export function App() {
               <Header variant="h2" description="Search for weather in any location">
                 Find Weather
               </Header>
-              <SpaceBetween size="s" direction="horizontal">
-                <FormField label="Location" stretch>
-                  <Autocomplete
-                    value={inputValue}
-                    onChange={(e) => handleInputChange(e.detail.value)}
-                    onSelect={(e) => handleSelectSuggestion(e.detail.value)}
-                    options={suggestions}
-                    placeholder="Enter city name (e.g., Boston)"
-                    disabled={loading}
-                    loading={loadingSuggestions}
-                    statusText={loadingSuggestions ? 'Loading suggestions...' : ''}
-                    empty="No matches found"
-                  />
-                </FormField>
-                <Button onClick={handleSearch} disabled={loading || !inputValue.trim()} variant="primary">
-                  {loading ? 'Loading...' : 'Search'}
-                </Button>
-              </SpaceBetween>
+              <FormField label="Location" stretch>
+                <Select
+                  selectedOption={selectedOption}
+                  onChange={handleSelectSuggestion}
+                  onInputChange={handleInputChange}
+                  options={suggestions}
+                  placeholder="Enter city name (e.g., Boston)"
+                  disabled={loading}
+                  filteringType="auto"
+                  statusText={loadingSuggestions ? 'Loading suggestions...' : ''}
+                  noMatch="No matches found"
+                />
+              </FormField>
             </Box>
 
             {/* Error Alert */}
