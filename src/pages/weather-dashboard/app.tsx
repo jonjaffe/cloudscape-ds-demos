@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Container,
   Header,
   SpaceBetween,
   Box,
-  Input,
+  Autocomplete,
   Button,
   FormField,
   Grid,
@@ -22,42 +22,87 @@ import styles from './styles.module.scss';
 export function App() {
   const [location, setLocation] = useState('New York');
   const [inputValue, setInputValue] = useState('');
+  const [suggestions, setSuggestions] = useState<Array<{ label: string; value: Location }>>([]);
+  const [loadingSuggestions, setLoadingSuggestions] = useState(false);
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const loadWeather = async (searchLocation: string) => {
-    if (!searchLocation.trim()) {
-      setError('Please enter a location');
-      return;
-    }
-
+  const loadWeather = async (selectedLocation: Location | string) => {
     setLoading(true);
     setError(null);
 
     try {
-      // Geocode the location to get coordinates
-      const locations = await fetchGeocoding(searchLocation);
-      
-      if (!locations || locations.length === 0) {
-        setError('Location not found. Please try another search.');
-        setLoading(false);
-        return;
+      let coords: Location;
+
+      if (typeof selectedLocation === 'string') {
+        if (!selectedLocation.trim()) {
+          setError('Please enter a location');
+          setLoading(false);
+          return;
+        }
+        // Geocode the location to get coordinates
+        const locations = await fetchGeocoding(selectedLocation);
+
+        if (!locations || locations.length === 0) {
+          setError('Location not found. Please try another search.');
+          setLoading(false);
+          return;
+        }
+        coords = locations[0];
+      } else {
+        coords = selectedLocation;
       }
 
-      const selectedLocation = locations[0];
-      
       // Fetch weather data for the coordinates
-      const data = await fetchWeatherData(selectedLocation.latitude, selectedLocation.longitude);
-      
+      const data = await fetchWeatherData(coords.latitude, coords.longitude);
+
+      const locationName = typeof selectedLocation === 'string' ? selectedLocation : coords.name;
       setWeatherData(data);
-      setLocation(searchLocation);
+      setLocation(locationName);
       setInputValue('');
+      setSuggestions([]);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch weather data');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleInputChange = async (value: string) => {
+    setInputValue(value);
+
+    if (!value.trim()) {
+      setSuggestions([]);
+      return;
+    }
+
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+
+    setLoadingSuggestions(true);
+
+    debounceTimer.current = setTimeout(async () => {
+      try {
+        const locations = await fetchGeocoding(value);
+        const formattedSuggestions = locations.map((loc) => ({
+          label: `${loc.name}${loc.admin1 ? ', ' + loc.admin1 : ''}${loc.country ? ', ' + loc.country : ''}`,
+          value: loc,
+        }));
+        setSuggestions(formattedSuggestions);
+      } catch (err) {
+        console.error('Failed to fetch suggestions:', err);
+        setSuggestions([]);
+      } finally {
+        setLoadingSuggestions(false);
+      }
+    }, 300);
+  };
+
+  const handleSelectSuggestion = (location: Location) => {
+    loadWeather(location);
   };
 
   // Load weather for initial location
@@ -71,11 +116,14 @@ export function App() {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  };
+  // Cleanup debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current);
+      }
+    };
+  }, []);
 
   return (
     <CustomAppLayout
@@ -90,15 +138,19 @@ export function App() {
               </Header>
               <SpaceBetween size="s" direction="horizontal">
                 <FormField label="Location" stretch>
-                  <Input
+                  <Autocomplete
                     value={inputValue}
-                    onChange={(e) => setInputValue(e.detail.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Enter city name"
+                    onChange={(e) => handleInputChange(e.detail.value)}
+                    onSelect={(e) => handleSelectSuggestion(e.detail.value)}
+                    options={suggestions}
+                    placeholder="Enter city name (e.g., Boston)"
                     disabled={loading}
+                    loading={loadingSuggestions}
+                    statusText={loadingSuggestions ? 'Loading suggestions...' : ''}
+                    empty="No matches found"
                   />
                 </FormField>
-                <Button onClick={handleSearch} disabled={loading} variant="primary">
+                <Button onClick={handleSearch} disabled={loading || !inputValue.trim()} variant="primary">
                   {loading ? 'Loading...' : 'Search'}
                 </Button>
               </SpaceBetween>
